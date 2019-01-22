@@ -1,0 +1,24 @@
+{
+  "name": "javel",
+  "version": "0.1.0",
+  "description": "Simple, lightweight and customisable Laravel models in your JavaScript",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lorisleiva/javel.git"
+  },
+  "keywords": [
+    "laravel",
+    "model",
+    "js"
+  ],
+  "author": "Loris Leiva",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lorisleiva/javel/issues"
+  },
+  "homepage": "https://github.com/lorisleiva/javel#readme"
+}
