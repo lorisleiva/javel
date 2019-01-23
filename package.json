@@ -2,8 +2,11 @@
   "name": "javel",
   "version": "0.1.0",
   "description": "Simple, lightweight and customisable Laravel models in your JavaScript",
-  "main": "src/index.js",
+  "main": "dist/javel.js",
+  "module": "src/index.js",
   "scripts": {
+    "build": "webpack --env.development && webpack --env.production",
+    "dev": "webpack --env.development --progress --colors --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,5 +23,11 @@
   "bugs": {
     "url": "https://github.com/lorisleiva/javel/issues"
   },
-  "homepage": "https://github.com/lorisleiva/javel#readme"
+  "homepage": "https://github.com/lorisleiva/javel#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "mixwith": "^0.1.1",
+    "webpack": "^4.29.0",
+    "webpack-cli": "^3.2.1"
+  }
 }
