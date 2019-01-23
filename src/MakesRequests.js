@@ -1,12 +1,11 @@
-import { snakeCase, URLJoin, flatten } from './utils'
-import { Mixin } from 'mixwith'
+import { snakeCase, URLJoin, flatten, getDependency } from '@utils'
+import { Mixin } from '@'
 
 /**
  * @needs HasAttributes
  */
 export default Mixin((superclass) => class extends superclass
 {
-
     /**
      * URLS
      */
@@ -37,9 +36,8 @@ export default Mixin((superclass) => class extends superclass
     }
     
     makeRequest ({ method, url, data, query }) {
-        if (axios) {
-            return axios({ method, url, data, params: query })
-        }
+        const axios = getDependency('axios')
+        if (axios) return axios({ method, url, data, params: query })
 
         throw new Error('Please override the `makeRequest` method and choose your http dependency.')
     }

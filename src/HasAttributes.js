@@ -1,4 +1,4 @@
-import { Mixin } from 'mixwith'
+import { Mixin } from '@'
 
 export default Mixin((superclass) => class extends superclass
 {

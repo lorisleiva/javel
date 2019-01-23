@@ -11,6 +11,8 @@ export { default as KeepsParentRelationship } from './KeepsParentRelationship'
 export { default as GeneratesUniqueKey } from './GeneratesUniqueKey'
 export { default as UsesMethodFieldWithFormData } from './UsesMethodFieldWithFormData'
 
-// Open up the mixin API from mixwith.js.
-// https://github.com/justinfagnani/mixwith.js
+/**
+ * Open up the mixin API from mixwith.js.
+ * @see https://github.com/justinfagnani/mixwith.js
+ */
 export { mix, Mixin } from 'mixwith'

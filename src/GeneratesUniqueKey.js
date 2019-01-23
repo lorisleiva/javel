@@ -1,5 +1,5 @@
-import { omit } from './utils'
-import { Mixin } from 'mixwith'
+import { omit } from '@utils'
+import { Mixin } from '@'
 
 /**
  * @needs HasAttributes
@@ -22,7 +22,7 @@ export default Mixin((superclass) => class extends superclass
     }
 })
 
-let newKeyGenerator = 0;
+let newKeyGenerator = 0
 
 function generateKey(prefix = 'new_') {
     return `${prefix}${newKeyGenerator++}`

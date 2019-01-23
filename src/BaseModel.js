@@ -4,7 +4,7 @@ export default class BaseModel
         this.fill(...args)
     }
 
-    fill (...args) {
+    fill () {
         return this
     }
 

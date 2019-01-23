@@ -1,5 +1,5 @@
-import { forOwn } from './utils'
-import { Mixin } from 'mixwith'
+import { forOwn } from '@utils'
+import { Mixin } from '@'
 
 /**
  * @needs HasAttributes

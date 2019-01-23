@@ -1,5 +1,5 @@
-import { omit } from './utils'
-import { Mixin } from 'mixwith'
+import { omit } from '@utils'
+import { Mixin } from '@'
 
 /**
  * @needs HasAttributes

@@ -13,22 +13,23 @@ module.exports = env => ({
         libraryTarget: 'umd',
         umdNamedDefine: true,
     },
-    // module: {
-    //     rules: [
-    //         {
-    //             test: /(\.jsx|\.js)$/,
-    //             loader: 'babel-loader',
-    //             exclude: /(node_modules|bower_components)/
-    //         },
-    //         {
-    //             test: /(\.jsx|\.js)$/,
-    //             loader: 'eslint-loader',
-    //             exclude: /node_modules/
-    //         }
-    //     ]
-    // },
-    // resolve: {
-    //     modules: [path.resolve('./node_modules'), path.resolve('./src')],
-    //     extensions: ['.json', '.js']
-    // }
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: [
+                    "babel-loader",
+                    "eslint-loader",
+                ],
+            },
+        ]
+    },
+    resolve: {
+        modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+        alias: {
+            '@': path.resolve(__dirname, 'src'),
+            '@utils': path.resolve(__dirname, 'src/utils'),
+        },
+    }
 });
