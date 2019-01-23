@@ -1,4 +1,4 @@
-import { mix } from '@'
+import { mix } from 'mixwith'
 import BaseModel from './BaseModel'
 import HasAttributes from './HasAttributes'
 import HasRelationships from './HasRelationships'

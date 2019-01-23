@@ -1,5 +1,5 @@
 import { snakeCase, URLJoin, flatten, getDependency } from '@utils'
-import { Mixin } from '@'
+import { Mixin } from 'mixwith'
 
 /**
  * @needs HasAttributes

@@ -3,7 +3,6 @@
   "version": "0.1.1",
   "description": "Simple, lightweight and customisable Laravel models in your JavaScript",
   "main": "dist/javel.js",
-  "module": "src/index.js",
   "scripts": {
     "dev": "webpack --env.development --progress --colors --hide-modules",
     "prod": "webpack --env.production --progress --colors --hide-modules",
@@ -26,15 +25,18 @@
     "url": "https://github.com/lorisleiva/javel/issues"
   },
   "homepage": "https://github.com/lorisleiva/javel#readme",
-  "dependencies": {},
+  "dependencies": {
+    "@babel/runtime": "^7.3.1",
+    "mixwith": "^0.1.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.2.2",
+    "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/preset-env": "^7.3.1",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
     "eslint": "^5.12.1",
     "eslint-loader": "^2.1.1",
-    "mixwith": "^0.1.1",
     "webpack": "^4.29.0",
     "webpack-cli": "^3.2.1"
   }
