@@ -1,6 +1,6 @@
 {
   "name": "javel",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Simple, lightweight and customisable Laravel models in your JavaScript",
   "main": "dist/javel.js",
   "scripts": {
