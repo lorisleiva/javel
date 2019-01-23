@@ -13,6 +13,9 @@ module.exports = env => ({
         libraryTarget: 'umd',
         umdNamedDefine: true,
     },
+    externals: {
+        mixwith: 'mixwith',
+    },
     module: {
         rules: [
             {
