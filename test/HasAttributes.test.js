@@ -1,6 +1,7 @@
 import test from 'ava'
-import { mix, BaseModel, HasAttributes } from '@'
-const Model = class extends mix(BaseModel).with(HasAttributes) {}
+import { stubs } from './helpers'
+import { HasAttributes } from '@'
+const { Model } = stubs.withMixins(HasAttributes)
 
 test('Attributes get be assigned and retrieved without being altered', t => {
     const article = new Model
