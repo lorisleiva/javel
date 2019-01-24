@@ -1,14 +1,12 @@
 import { mix, BaseModel, Mixin } from '@'
 
-export default { withMixins, withModel, parseMixins }
-
-export function withMixins (...mixins) {
+function withMixins (...mixins) {
     mixins = parseMixins(...mixins)
     const Model = class extends mix(BaseModel).with(...mixins) {}
     return withModel(Model)
 }
 
-export function parseMixins (...mixins) {
+function parseMixins (...mixins) {
     return mixins.map(mixin => {
         if (typeof mixin !== 'object') return mixin
         return Mixin(superclass => {
@@ -19,7 +17,7 @@ export function parseMixins (...mixins) {
     })
 }
 
-export function withModel (Model) {
+function withModel (Model) {
     /**
      * @param tags Article <-[n-n]-> Tag
      * @param comments Article <-[1-n]-> Comment
@@ -74,3 +72,5 @@ export function withModel (Model) {
 
     return { Model, Article, Comment, Tag, User }
 }
+
+export default { withMixins, withModel, parseMixins }
