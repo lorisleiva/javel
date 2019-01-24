@@ -3,12 +3,15 @@ import { stubs } from './helpers'
 import { HasAttributes, HasRelationships } from '@'
 const { Article, Comment, Tag, User } = stubs.withMixins(HasAttributes, HasRelationships)
 
-test('Relationship attributes are wrapped into their relevant model', t => {
-    const articleRelationships = new Article().relationships()
-    t.is(articleRelationships.tags, Tag)
-    t.is(articleRelationships.comments, Comment)
-    t.is(articleRelationships.author, User)
+test('Assert article relationships', t => {
+    t.deepEqual(new Article().relationships(), {
+        tags: Tag,
+        comments: Comment,
+        author: User,
+    })
+})
 
+test('Relationship attributes are wrapped into their relevant model', t => {
     const article = new Article({
         id: 50,
         title: 'My blog post',
