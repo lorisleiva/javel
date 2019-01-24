@@ -1,5 +1,5 @@
 import test from 'ava'
-import { BaseModel, HasAttributes, mix } from '@'
+import { mix, BaseModel, HasAttributes } from '@'
 const Model = class extends mix(BaseModel).with(HasAttributes) {}
 
 test('Attributes get be assigned and retrieved without being altered', t => {
