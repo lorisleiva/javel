@@ -1,10 +1,22 @@
-import { mix, BaseModel } from '@'
+import { mix, BaseModel, Mixin } from '@'
 
-export default { withMixins, withModel }
+export default { withMixins, withModel, parseMixins }
 
 export function withMixins (...mixins) {
+    mixins = parseMixins(...mixins)
     const Model = class extends mix(BaseModel).with(...mixins) {}
     return withModel(Model)
+}
+
+export function parseMixins (...mixins) {
+    return mixins.map(mixin => {
+        if (typeof mixin !== 'object') return mixin
+        return Mixin(superclass => {
+            const wrappedMixin = class extends superclass {}
+            wrappedMixin.prototype = Object.assign(wrappedMixin.prototype, mixin)
+            return wrappedMixin
+        })
+    })
 }
 
 export function withModel (Model) {
