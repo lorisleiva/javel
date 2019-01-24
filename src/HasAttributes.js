@@ -19,7 +19,7 @@ export default Mixin((superclass) => class extends superclass
     }
 
     getAttributes () {
-        return this
+        return { ...this }
     }
 
     primaryKey () {
@@ -35,6 +35,6 @@ export default Mixin((superclass) => class extends superclass
     }
 
     clone () {
-        return this.make(Object.assign({}, this.getAttributes()))
+        return this.make({ ...this.getAttributes() })
     }
 })
