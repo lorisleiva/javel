@@ -1,6 +1,6 @@
-const path = require('path');
-const pkg = require('./package.json');
-const libraryName = pkg.name;
+const path = require('path')
+const pkg = require('./package.json')
+const libraryName = pkg.name
 
 module.exports = env => ({
     mode: env.production ? 'production' : 'development',
@@ -22,8 +22,8 @@ module.exports = env => ({
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: [
-                    "babel-loader",
-                    "eslint-loader",
+                    'babel-loader',
+                    'eslint-loader',
                 ],
             },
         ]
@@ -35,4 +35,4 @@ module.exports = env => ({
             '@utils': path.resolve(__dirname, 'src/utils'),
         },
     }
-});
+})

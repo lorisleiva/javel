@@ -8,7 +8,7 @@
     "prod": "webpack --env.production --progress --colors --hide-modules",
     "watch": "npm run dev -- --watch",
     "build": "npm run dev && npm run prod",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ava"
   },
   "repository": {
     "type": "git",
@@ -33,11 +33,25 @@
     "@babel/core": "^7.2.2",
     "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/preset-env": "^7.3.1",
+    "@babel/register": "^7.0.0",
+    "ava": "^1.1.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
+    "babel-plugin-webpack-alias-7": "^0.1.1",
     "eslint": "^5.12.1",
     "eslint-loader": "^2.1.1",
     "webpack": "^4.29.0",
     "webpack-cli": "^3.2.1"
+  },
+  "ava": {
+    "files": [
+      "test/**/*.test.js"
+    ],
+    "sources": [
+      "src/**/*.js"
+    ],
+    "require": [
+      "@babel/register"
+    ]
   }
 }

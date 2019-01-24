@@ -9,5 +9,17 @@
         ["@babel/plugin-transform-runtime", {
             "helpers": false,   
         }],
-    ]
+    ],
+    "env": {
+        "test": {
+            "presets": [
+                ["@babel/preset-env"],
+            ],
+            "plugins": [
+                ["babel-plugin-webpack-alias-7", {
+                    "config": "./webpack.config.test.js"
+                }],
+            ]
+        }
+    }
 }
