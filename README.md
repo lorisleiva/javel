@@ -64,11 +64,11 @@ export default class Article extends Model {
 }
 ```
 
-Finally you will likely want to configure which URL should be used for each actions (find, create, update, etc.). You might also want to add some behavior right before or after requests are made and customize how to handle the response. You can learn all about this in the [documentation of the `MakesRequests` mixin](TODO).
+Finally you will likely want to configure which URL should be used for each actions (find, create, update, etc.). You might also want to add some behavior right before or after requests are made and customize how to handle the response. You can learn all about this in the [documentation of the `MakesRequests` mixin](docs/MakesRequests.md).
 
 ## A chain of mixins
 
-Javel uses the [mixwith library](TODO) to separate each fonctionality of a Model into dedicated mixins (comparable to how Eloquent uses traits in Laravel). For the sake of convenience, Javel exposes the mixwith's API directly:
+Javel uses the [mixwith library](https://github.com/justinfagnani/mixwith.js) to separate each fonctionality of a Model into dedicated mixins (comparable to how Eloquent uses traits in Laravel). For the sake of convenience, Javel exposes the mixwith's API directly:
 
 ```js
 import { Model as BaseModel, Mixin, mix } from 'javel'
@@ -109,15 +109,15 @@ class Model extends MixinC {}
 
 By default, the base Model provided by javel includes the following mixins (in this order, i.e. the lower overrides the higher). You can learn more about each of them by reading their dedicated documentation.
 
-- [HasAttributes](TODO) Defines the basis of getting and setting attributes on a Model and provide some useful methods like `primaryKey`, `exists`, `is`, `clone`, etc.
-- [HasRelationships](TODO) Enables models to configure their relationships with each other so that their attributes are automatically wrapped in the right model.
-- [KeepsParentRelationship](TODO) Ensures each child relationship keeps track of its parent and how to access itself from it. This enables models to climb up the relationship tree and even remove themselves from their parent when deleted.
-- [MakesRequests](TODO) Introduces async actions (`find`, `create`, `update`, etc.) to conveniently request the server and provides all the hooks necessary to customize how to handle your request/response proctol for each model.
+- [HasAttributes](docs/HasAttributes.md) Defines the basis of getting and setting attributes on a Model and provide some useful methods like `primaryKey`, `exists`, `is`, `clone`, etc.
+- [HasRelationships](docs/HasRelationships.md) Enables models to configure their relationships with each other so that their attributes are automatically wrapped in the right model.
+- [KeepsParentRelationship](docs/KeepsParentRelationship.md) Ensures each child relationship keeps track of its parent and how to access itself from it. This enables models to climb up the relationship tree and even remove themselves from their parent when deleted.
+- [MakesRequests](docs/MakesRequests.md) Introduces async actions (`find`, `create`, `update`, etc.) to conveniently request the server and provides all the hooks necessary to customize how to handle your request/response proctol for each model.
 
 
 ## Extra mixins available
 
 Javel also provides some additional mixins that can be useful to plug in or to get inspired from when writing your own. Don't hesitate to PR your best mixins and share it with us.
 
-- [GeneratesUniqueKey](TODO) Attaches a unique key to every new model instanciated. If the model has a primary key available, the primary key will be used instead of generating a new unique key.
-- [UsesMethodFieldWithFormData](TODO) Transforms the `update` action to use the `POST` method with the `_method=PATCH` field when the provided data is an instance of FormData.
+- [GeneratesUniqueKey](docs/GeneratesUniqueKey.md) Attaches a unique key to every new model instanciated. If the model has a primary key available, the primary key will be used instead of generating a new unique key.
+- [UsesMethodFieldWithFormData](docs/UsesMethodFieldWithFormData.md) Transforms the `update` action to use the `POST` method with the `_method=PATCH` field when the provided data is an instance of FormData.
