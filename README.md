@@ -105,6 +105,8 @@ class MixinC extends MixinB {}
 class Model extends MixinC {}
 ```
 
+Check out [the lifecycle of a base model](docs/lifecycle.md) before creating your own mixins.
+
 ## Mixins included in Javel's Model
 
 By default, the base Model provided by javel includes the following mixins (in this order, i.e. the lower overrides the higher). You can learn more about each of them by reading their dedicated documentation.
