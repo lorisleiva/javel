@@ -29,7 +29,7 @@ await article.save()                                        // => Article { id: 
 
 ## Getting started
 
-Start by creating your base model that all other models will extends from. In there you can override any logic you want or, even better, attach additional behavior using mixins ([see below]()).
+Start by creating your base model that all other models will extends from. In there you can override any logic you want or, even better, attach additional behavior using mixins ([see below](#a-chain-of-mixins)).
 
 ```js
 import { Model as BaseModel } from 'javel'
