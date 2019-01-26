@@ -106,7 +106,7 @@ buildUrl ({ action, params }) {
 }
 ```
 
-This would build the following URLs for the following actions:
+This would build the following URLs for the following actions.
 
 ```
 all         => '/api/article' (GET)
@@ -162,7 +162,7 @@ afterRequest (response, request) {
 ```
 
 ### Default `afterRequest`
-By default, the `afterRequest` method will `make` a new model (or list of models) if the action was made through a static call (e.g. `Article.create()`) and `fill` the current one otherwise. The only exception is for the `paginate` action which should return a list of model in a nested `data` attribute.
+By default, the `afterRequest` method will `make` a new model (or list of models) if the action was made through a static call (e.g. `Article.create()`) and `fill` the current one otherwise. The only exception is for the `paginate` action which should return a list of models in a nested `data` attribute.
 
 ```js
 afterRequest ({ data }, { action, isStatic }) {
@@ -203,16 +203,96 @@ This will make sure the model is deleted from its parent relationship (if any) u
 
 ## Other request hooks
 
-TODO: before/failed
+### `beforeRequest`
+Called right before making the request (after the URL has been built). Defaults to:
 
-## Add extra request data to actions
+```js
+beforeRequest (request) {
+    return request
+}
+```
 
-TODO
+### `failedRequest`
+Called when the request to the server did not succeed. Default to:
 
-## Create your own actions
+```js
+failedRequest (error, request) {
+    throw error
+}
+```
 
-TODO
+## Add extra request details to your actions
+
+The last argument of every action is a `configs` variable that will be merged to the request.
+
+For example, if you wanted to pass some filters to your `Article.all()` action, you could do.
+
+```js
+const query = { search: 'Laravel', limit: 5 }
+const articles = await Article.all({ query })
+// => GET '/api/article?search=Laravel&limit=5'
+```
+
+You could also change the method of the `update` action.
+
+```js
+await article.update(
+    { name: 'Updated blog post', _method: 'PATCH' }, // => attributes, shortcut used as data
+    { method: 'POST' }                               // => configs, merged with the request
+)
+```
+
+Another example could be to explicitly provide an URL that includes a parent's primary key.
+
+```js
+const article = await Article.find(1)
+const comment = await Article.create(
+    { body: 'Super article, thanks!' },
+    { url: `article/${article.primaryKey()}/comment` },
+)
+// => POST '/api/article/1/comment'
+```
+
+Note that you could also implement that last example by updating the `buildUrl` method.
 
 ## Override existing actions
 
-TODO
+It might sometimes make more sense to override the action altogether to make your calls a bit cleaner. For instance, this is how we would clean up the previous example.
+
+```js
+class Comment extends Model {
+    static create (article, attributes, configs = {}) {
+        return super.create(attributes, { url: `article/${article.primaryKey()}/comment`, ...configs })
+    }
+}
+```
+
+```js
+const article = await Article.find(1)
+const comment = await Article.create(article, { body: 'Super article, thanks!' })
+// => POST '/api/article/1/comment'
+```
+
+## Create your own actions
+
+If you look at the actions implements in the `MakesRequests` mixin, you can see that there isn't much to it. You simply need to call the `request` method to make a custom request and provide the default settings that define your action.
+
+For example you could have a `publish` action that published the current article.
+
+```js
+publish (configs = {}) {
+    const data = { published_at: new Date().toISOString() }
+    return this.request({ method: 'PATCH', action: 'publish', params: [this.primaryKey()], data, ...configs })
+}
+```
+
+When creating your custom static actions don't forget to set up `isStatic: true` and to call `(new this).request(...)` instead of `this.request(...)`. For example:
+
+```js
+static allWithTag (tag, configs = {}) {
+    const query = { search: tag }
+    return (new this).request({ method: 'GET', isStatic: true, query ...configs })
+}
+```
+
+Note that here I did not bother giving the action as name so it will default to `custom`.
