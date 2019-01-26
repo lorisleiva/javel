@@ -56,8 +56,8 @@ get(key) { return this._attributes[key] }
 set(key, value) { this._attributes[key] = value }
 ```
 
-*Pros.* You don't have the problem of having to reset attributes that could be removed since the entire attribute object is replaced every time.
-*Cons.* You cannot access attributes directly on the model like `article.name`. Instead you need to use `article.get('name')`. If you use Vue.js that means `v-model="article.name"` becomes `:value="article.get('name')" @input="val => article.set('name', val)"`.
+**Pros.** You don't have the problem of having to reset attributes that could be removed since the entire attribute object is replaced every time. \
+**Cons.** You cannot access attributes directly on the model like `article.name`. Instead you need to use `article.get('name')`. If you use Vue.js that means `v-model="article.name"` becomes `:value="article.get('name')" @input="val => article.set('name', val)"`.
 
 ### Use proxies to access the private attribute variable
 
@@ -70,8 +70,8 @@ setAttributes (attributes) { this._attributes = attributes }
 getAttributes () { return this._attributes }
 ```
 
-*Pros.* Your proxy settings should now enable `this.article` to access `this._attributes.article` under the hood. Therefore we don't have the problem of resetting attributes *and* we can access attributes as if their were directly on the model.
-*Cons.* [Browser support is not great yet](https://caniuse.com/#feat=proxy) and no perfect polyfill exists.
+**Pros.** Your proxy settings should now enable `this.article` to access `this._attributes.article` under the hood. Therefore we don't have the problem of resetting attributes *and* we can access attributes as if their were directly on the model. \
+**Cons.** [Browser support is not great yet](https://caniuse.com/#feat=proxy) and no perfect polyfill exists.
 
 ## Customize the primary key
 
