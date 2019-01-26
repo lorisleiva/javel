@@ -275,9 +275,9 @@ const comment = await Comment.create(article, { body: 'Super article, thanks!' }
 
 ## Create your own actions
 
-If you look at the actions implements in the `MakesRequests` mixin, you can see that there isn't much to it. You simply need to call the `request` method to make a custom request and provide the default settings that define your action.
+If you look at the actions implemented in the `MakesRequests` mixin, you can see that there isn't much to it. You simply need to call the `request` method to make a custom request and provide the default settings that define your action.
 
-For example you could have a `publish` action that published the current article.
+For example you could have a `publish` action that publishes the current article.
 
 ```js
 publish (configs = {}) {
@@ -291,8 +291,8 @@ When creating your custom static actions don't forget to set up `isStatic: true`
 ```js
 static allWithTag (tag, configs = {}) {
     const query = { search: tag }
-    return (new this).request({ method: 'GET', isStatic: true, query ...configs })
+    return (new this).request({ method: 'GET', isStatic: true, query, ...configs })
 }
 ```
 
-Note that here I did not bother giving the action as name so it will default to `custom`.
+Note that here I did not bother giving the action a name so it will default to `custom`.
