@@ -66,7 +66,20 @@ makeRequest ({ method, url, data, query }) {
 
 ## The request object
 
-TODO: diagram (data, params, query) + actions, isStatic + add any custom info on the object
+```js
+const {
+    method,     // => (String) GET (default), POST, PATCH, DELETE, etc...
+    data        // => (Object) The body of the request.
+    query,      // => (Object) Data to attach as a query string, e.g. `?foo=bar`.
+    params,     // => (Array) The parameters to use to build the URL, e.g. [model.id]`
+    url,        // => (String) The built URL
+    action,     // => (String) Which method triggered this request, e.g. 'find', 'create', 'save', etc. Defaults to 'custom'
+    isStatic,   // => (Boolean) Whether the request was triggered by a static call, e.g. Article.create(). Defaults to false.
+    ...rest     // => Anything else you want to attach to the request.
+} = request
+```
+
+Note that if you send a request without explicitly providing an `url`, the url will be generated using the `buildUrl` method.
 
 ## Configure URLs (routing)
 
