@@ -246,7 +246,7 @@ Another example could be to explicitly provide an URL that includes a parent's p
 
 ```js
 const article = await Article.find(1)
-const comment = await Article.create(
+const comment = await Comment.create(
     { body: 'Super article, thanks!' },
     { url: `article/${article.primaryKey()}/comment` },
 )
@@ -269,7 +269,7 @@ class Comment extends Model {
 
 ```js
 const article = await Article.find(1)
-const comment = await Article.create(article, { body: 'Super article, thanks!' })
+const comment = await Comment.create(article, { body: 'Super article, thanks!' })
 // => POST '/api/article/1/comment'
 ```
 
