@@ -11,19 +11,19 @@ When creating your own mixin, you will likely need to hook into when a new model
 Therefore when creating mixins, you will often need to extend the behavior of the `fill` method by doing something like this:
 
 ```js
-    fill (...args) {
-        super.fill(...args)
-        this.doSomethingWith(args)
-        return this
-    }
+fill (...args) {
+    super.fill(...args)
+    this.doSomethingWith(args)
+    return this
+}
 ```
 
 Note that this is how most native mixins add their behavior to the BaseModel. For example, this is how the `HasAttributes` mixins sets attributes automatically:
 
 ```js
-    fill (attributes = {}, ...args) {
-        super.fill(attributes, ...args)
-        this.setAttributes(attributes)
-        return this
-    }
+fill (attributes = {}, ...args) {
+    super.fill(attributes, ...args)
+    this.setAttributes(attributes)
+    return this
+}
 ```
