@@ -106,7 +106,7 @@ buildUrl ({ action, params }) {
 }
 ```
 
-This would build the following URL for the following actions:
+This would build the following URLs for the following actions:
 
 ```
 all         => '/api/article' (GET)
@@ -141,9 +141,9 @@ buildUrl ({ params }) {
 // class CommentAttachment => '/api/comment_attachment'
 ```
 
-Whilst this will work on development mode, when you'll compile your JavaScript for production, it will very likely be minified and therefore, `this.constructor.name` will not match the name of your class anymore. You'll end up with failed API calls like `/api/t` instead of `/api/article`.
+Whilst this will work on development mode, when you'll compile your JavaScript for production, it will very likely be minified and, therefore, `this.constructor.name` will not match the name of your class anymore. You'll end up with failed API calls like `/api/t` instead of `/api/article`.
 
-To work around this issue, you'll either need to configure your minifier to keep class names intact or you'll have to explicitely define the `buildUrl` method for each model. The second approach has the advantage of being more explicit and you'll very likely need to tweek the `buildUrl` method for each model anyway.
+To work around this issue, you'll either need to configure your minifier to keep class names intact or you'll have to explicitely define the `buildUrl` method for each model. The second approach has the advantage of being more explicit and you'll very likely need to tweak the `buildUrl` method for each model anyway.
 
 ```js
 buildUrl ({ params }) {
@@ -153,7 +153,53 @@ buildUrl ({ params }) {
 
 ## Handle the response
 
-TODO: afterRequest
+You can configure how to handle the response of each actions via the `afterRequest` hook. Whatever you return here is what will be returned by the action. The `afterRequest` method provides the `response` from the server as the first argument and the `request` that was sent as the second argument.
+
+```js
+afterRequest (response, request) {
+    //
+}
+```
+
+### Default `afterRequest`
+By default, the `afterRequest` method will `make` a new model (or list of models) if the action was made through a static call (e.g. `Article.create()`) and `fill` the current one otherwise. The only exception is for the `paginate` action which should return a list of model in a nested `data` attribute.
+
+```js
+afterRequest ({ data }, { action, isStatic }) {
+    if (action === 'paginate') {
+        data.data = this.make(data.data)
+        return data
+    }
+
+    return isStatic ? this.make(data) : this.fill(data)
+}
+```
+
+### Customize `afterRequest`
+Consider the following example.
+
+```js
+afterRequest ({ data }) {
+    return this.make(data)
+}
+```
+
+This will retrieve a brand new instance of a model every time you make a call to the server. Thefore you'll need to update the reference of the object when you update it, e.g. `article = await article.update(...)`. This can be a good way to avoid the problem of attributes removed from the server ([See HasAttributes](HasAttributes.md#setting-attributes-directly-on-the-object)). Note that I removed the use case of the `paginate` action for simplicity.
+
+Another example would be to change the behavior of a single action but keep the rest as-is.
+
+```js
+afterRequest (response, request) {
+    if (request.action === 'delete') {
+        this.removeFromParent()
+        return this
+    }
+
+    return super.afterRequest(response, request)
+}
+```
+
+This will make sure the model is deleted from its parent relationship (if any) upon deletion from the server. Note that the `removeFromParent` method comes from the [`KeepsParentRelationship` mixin](KeepsParentRelationship.md) (included in Javel's Model).
 
 ## Other request hooks
 
