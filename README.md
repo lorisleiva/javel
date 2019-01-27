@@ -1,6 +1,8 @@
 # Javel
 🎁 Simple, lightweight and customisable Laravel models in your JavaScript
 
+![cover](https://user-images.githubusercontent.com/3642397/51794956-cd244380-21d4-11e9-8e91-b7eb0ffb79e8.png)
+
 ## Installation
 
 ```sh
