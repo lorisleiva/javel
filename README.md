@@ -1,7 +1,7 @@
 # Javel
 🎁 Wrap your plain JavaScript objects into customizable Laravel-like models
 
-![cover](https://user-images.githubusercontent.com/3642397/51794956-cd244380-21d4-11e9-8e91-b7eb0ffb79e8.png)
+![cover](https://user-images.githubusercontent.com/3642397/52560981-55702e80-2dfa-11e9-979f-179e7fccadde.png)
 
 ## Installation
 
