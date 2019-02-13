@@ -70,7 +70,7 @@ Finally you will likely want to configure which URL should be used for each acti
 
 ## A chain of mixins
 
-Javel uses the [mixwith library](https://github.com/justinfagnani/mixwith.js) to separate each fonctionality of a Model into dedicated mixins (comparable to how Eloquent uses traits in Laravel). For the sake of convenience, Javel exposes the mixwith's API directly:
+Javel uses the [mixwith library](https://github.com/justinfagnani/mixwith.js) to separate each functionality of a Model into dedicated mixins (comparable to how Eloquent uses traits in Laravel). For the sake of convenience, Javel exposes the mixwith's API directly:
 
 ```js
 import { Model as BaseModel, Mixin, mix } from 'javel'
