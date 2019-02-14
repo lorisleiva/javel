@@ -45,7 +45,7 @@ Typically, in this base model, you would set up how to reach your server by over
 
 ```js
 export default class Model extends BaseModel {
-    baseModel () {
+    baseUrl () {
         return '/api'
     }
     makeRequest ({ method, url, data, query }) {
