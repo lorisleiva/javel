@@ -5,19 +5,7 @@ import { Mixin } from 'mixwith'
  */
 export default Mixin((superclass) => class extends superclass
 {
-    beforeRequest(request) {
-        if (superclass.hasOwnProperty('beforeRequest')) {
-            superclass.beforeRequest(request)
-        }
-
-        if (!request.builder) {
-            return request
-        }
-
-        if (typeof request.builder !== 'function') {
-            throw new Error('Builder property must be a function.')
-        }
-
+    static query() {
         let queryBuilderModule
 
         try {
@@ -28,23 +16,27 @@ export default Mixin((superclass) => class extends superclass
 
         const builder = queryBuilderModule.query()
 
-        request.builder(builder)
+        builder.get = (configs = {}) => {
+            const params = builder
+                .build()
+                .split('?')[1]
+                .split('&')
+                .map(part => part.split('='))
+                .reduce((query, [key, value]) => {
+                    const decodedKey = decodeURIComponent(key)
 
-        request.query = builder
-            .build()
-            .split('?')[1]
-            .split('&')
-            .map(part => part.split('='))
-            .reduce((query, [key, value]) => {
-                const decodedKey = decodeURIComponent(key)
+                    if (!query.hasOwnProperty(decodedKey)) {
+                        query[decodedKey] = decodeURIComponent(value)
+                    }
 
-                if (!query.hasOwnProperty(decodedKey)) {
-                    query[decodedKey] = decodeURIComponent(value)
-                }
+                    return query
+                })
 
-                return query
-            }, typeof request.query === 'object' ? request.query : {})
+            configs.query = Object.assign(params, configs.query)
 
-        return request
+            return this.all(configs)
+        }
+
+        return builder
     }
 })
