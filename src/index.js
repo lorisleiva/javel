@@ -10,6 +10,7 @@ export { default as KeepsParentRelationship } from './KeepsParentRelationship'
 // Extra mixins available.
 export { default as GeneratesUniqueKey } from './GeneratesUniqueKey'
 export { default as UsesMethodFieldWithFormData } from './UsesMethodFieldWithFormData'
+export { default as IntegratesQueryBuilder } from './IntegratesQueryBuilder'
 
 /**
  * Open up the mixin API from mixwith.js.

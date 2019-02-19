@@ -30,7 +30,7 @@ export default Mixin((superclass) => class extends superclass
                     }
 
                     return query
-                })
+                }, {})
 
             configs.query = Object.assign(params, configs.query)
 
