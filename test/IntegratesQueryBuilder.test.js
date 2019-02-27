@@ -3,26 +3,24 @@ import {host, stubs} from './helpers'
 import { HasAttributes, MakesRequests } from '@'
 import IntegratesQueryBuilder from '@/IntegratesQueryBuilder'
 const { Article } = stubs.withMixins(HasAttributes, MakesRequests, IntegratesQueryBuilder)
-import mock from 'mock-require'
 import nock from 'nock'
-import { QueryBuilder } from './helpers/mock-js-query-builder'
-
-const MOCK_JS_QUERY_BUILDER_PATH = './helpers/mock-js-query-builder.js'
+import Javel from '@/Javel'
+import * as MockJsQueryBuilder from './helpers/mock-js-query-builder';
 
 test('It throws an error if "js-query-builder" is not installed', t => {
     t.throws(Article.query, Error)
 })
 
 test('It returns QueryBuilder instance on *query()* method call', t => {
-    mock('js-query-builder', MOCK_JS_QUERY_BUILDER_PATH)
+    Javel.registerOptionalModule('js-query-builder', MockJsQueryBuilder)
 
-    t.true(Article.query() instanceof QueryBuilder)
+    t.true(Article.query() instanceof MockJsQueryBuilder.QueryBuilder)
 
-    mock.stop('js-query-builder')
+    Javel.forgetOptionalModules()
 })
 
 test('It returns proper results on *get()* method call', async t => {
-    mock('js-query-builder', MOCK_JS_QUERY_BUILDER_PATH)
+    Javel.registerOptionalModule('js-query-builder', MockJsQueryBuilder)
 
     nock(host)
         .get('/api/article?sort=-id')
@@ -41,5 +39,5 @@ test('It returns proper results on *get()* method call', async t => {
     articles.forEach(article => t.true(article instanceof Article))
     t.true(nock.isDone())
 
-    mock.stop('js-query-builder')
+    Javel.forgetOptionalModules()
 })

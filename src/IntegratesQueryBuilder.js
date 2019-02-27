@@ -1,4 +1,5 @@
 import { Mixin } from 'mixwith'
+import Javel from '@/Javel'
 
 /**
  * @needs MakesRequests
@@ -9,9 +10,9 @@ export default Mixin((superclass) => class extends superclass
         let queryBuilderModule
 
         try {
-            queryBuilderModule = require('js-query-builder')
+            queryBuilderModule = Javel.resolveOptionalModule('js-query-builder')
         } catch (e) {
-            throw new Error('IntegratesQueryBuilder mixin requires "js-query-builder" dependency to be installed.')
+            throw new Error('IntegratesQueryBuilder mixin requires optional "js-query-builder" module to be registered.')
         }
 
         const builder = queryBuilderModule.query()
