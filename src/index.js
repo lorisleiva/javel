@@ -15,6 +15,9 @@ export { default as GeneratesUniqueKey } from './GeneratesUniqueKey'
 export { default as UsesMethodFieldWithFormData } from './UsesMethodFieldWithFormData'
 export { default as IntegratesQueryBuilder } from './IntegratesQueryBuilder'
 
+// Open up the ModuleRegistrar API.
+export * from './ModuleRegistrar'
+
 /**
  * Open up the mixin API from mixwith.js.
  * @see https://github.com/justinfagnani/mixwith.js
