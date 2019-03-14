@@ -17,7 +17,7 @@ import Model from 'javel'
 class Article extends Model {/* ... */}
 
 await Article.all({ /* request */ })                        // => [ Article* ]
-await Article.paginate({ data: { page: 2 } })               // => { data: [ Article* ], current_page: 2, ... }
+await Article.paginate({ query: { page: 2 } })              // => { data: [ Article* ], current_page: 2, ... }
 await Article.find(1)                                       // => Article { id: 1, ... }
 
 let article = await Article.create({ name: 'My article' })  // => Article { id: 2, name: 'My article' }
