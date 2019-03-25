@@ -1,11 +1,9 @@
 import test from 'ava'
-import { host, stubs } from './helpers'
-import { HasAttributes, MakesRequests } from '@'
-import IntegratesQueryBuilder from '@/IntegratesQueryBuilder'
-const { Article } = stubs.withMixins(HasAttributes, MakesRequests, IntegratesQueryBuilder)
 import nock from 'nock'
-import { registerModule, forgetAllModules } from '@/ModuleRegistrar'
-import * as MockJsQueryBuilder from './helpers/mock-js-query-builder';
+import { host, stubs, MocksServer } from './helpers'
+import { HasAttributes, MakesRequests, IntegratesQueryBuilder, registerModule, forgetAllModules } from '@'
+const { Article } = stubs.withMixins(HasAttributes, MakesRequests, IntegratesQueryBuilder, MocksServer)
+import * as MockJsQueryBuilder from './helpers/mock-js-query-builder'
 
 test('It throws an error if "js-query-builder" is not installed', t => {
     t.throws(Article.query, Error)

@@ -1,13 +1,13 @@
 const QueryBuilder = class {
-    constructor(...args) {
+    constructor() {
         this._built = '?'
     }
 
-    foo(...args) {
+    foo() {
         return this
     }
 
-    bar(...args) {
+    bar() {
         return this
     }
 
