@@ -1,6 +1,3 @@
-// Javel
-export { default as Javel } from './Javel'
-
 // Models and mixins included.
 export { default } from './Model'
 export { default as Model } from './Model'
