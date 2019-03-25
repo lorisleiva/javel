@@ -125,3 +125,27 @@ Javel also provides some additional mixins that can be useful to plug in or to g
 
 - [GeneratesUniqueKey](docs/GeneratesUniqueKey.md) Attaches a unique key to every new model instanciated. If the model has a primary key available, the primary key will be used instead of generating a new unique key.
 - [UsesMethodFieldWithFormData](docs/UsesMethodFieldWithFormData.md) Transforms the `update` action to use the `POST` method with the `_method=PATCH` field when the provided data is an instance of FormData.
+- [IntegratesQueryBuilder](docs/IntegratesQueryBuilder.md) An easy way to build a query string compatible with "spatie/laravel-query-builder" *(Has dependencies: [`js-query-builder`](https://github.com/coderello/js-query-builder))*.
+
+## Optional dependencies
+
+Some extra mixins have additional dependencies that need to be resolved. For example, some mixins could wrap a third party library to make it work with Javel out-of-the-box. Because these mixins are optional (you can choose not to add them), their dependencies must also be optional so that you don't end up loading lots of dependencies you don't need.
+
+This means, when you *do* decide to pull in a mixin that has dependencies, you have to install them yourself and tell Javel how to access it, like this:
+
+```sh
+npm i third-party-library
+```
+
+```js
+import ThirdPartyLibrary from 'third-party-library'
+import { Model as BaseModel, mix, SomeMixinThatUsesThirdPartyLibraries, registerModule } from 'javel'
+
+registerModule('third-party-library', ThirdPartyLibrary)
+
+class Model extends mix(BaseModel).with(SomeMixinThatUsesThirdPartyLibraries) {
+    //
+}
+```
+
+<small>Note: This behaviour has been designed as a workaround of webpack's optional `externals` which [unfortunately creates warnings when optional dependencies are not present](https://github.com/webpack/webpack/issues/7713#issuecomment-467888437).</small>
