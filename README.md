@@ -1,5 +1,5 @@
 # Javel
-🎁 Wrap your plain JavaScript objects into customizable Laravel-like models
+🎁 Wrap your plain JavaScript objects into customizable Laravel-like models. [Read introduction article](https://lorisleiva.com/introducing-javel/).
 
 ![cover](https://user-images.githubusercontent.com/3642397/52560981-55702e80-2dfa-11e9-979f-179e7fccadde.png)
 
