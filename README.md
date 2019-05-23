@@ -54,7 +54,7 @@ export default class Model extends BaseModel {
 }
 ```
 
-Note that `baseModel` defaults to `/api` and that `makeRequest` will automatically use axios if it available in the `window` (which is the case by default in Laravel).
+Note that `baseUrl` defaults to `/api` and that `makeRequest` will automatically use axios if it available in the `window` (which is the case by default in Laravel).
 
 Next, create specific models for your application.
 
