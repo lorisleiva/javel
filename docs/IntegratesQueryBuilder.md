@@ -11,10 +11,9 @@
 You can add it to your models like this.
 
 ```js
-import QueryBuilder from 'js-query-builder'
 import { Model as BaseModel, mix, IntegratesQueryBuilder, registerModule } from 'javel'
 
-registerModule('js-query-builder', QueryBuilder)
+registerModule('js-query-builder', require('js-query-builder'))
 
 export default class Model extends mix(BaseModel).with(IntegratesQueryBuilder) {
     ///
